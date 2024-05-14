@@ -1,0 +1,16 @@
+function weightAutomation()
+{
+    $ip = request()->ip();
+    $mac = shell_exec("arp $ip | awk '{print $4}'");
+     $userAgent = request()->header('User-Agent');
+     $deviceAttributes = $ip . $mac . $userAgent;
+     $uniqueId = md5($deviceAttributes);
+    return $uniqueId;
+}
+
+Helper Function 
+
+ public  function smartKey()
+    {
+      return  $measurement = weightAutomation();
+    }

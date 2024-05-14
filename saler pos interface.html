@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Seller POS Interface</title>
+  <!-- Bootstrap 3 CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Seller POS Interface</h1>
+
+    <!-- Table to display items -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>SKU</th>
+          <th>Unit</th>
+          <th>U.Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="item-list">
+        <!-- Rows will be dynamically added here -->
+      </tbody>
+    </table>
+
+    <!-- Form to add new items -->
+    <form id="add-item-form">
+      <div class="form-group">
+        <label for="item-name">Item:</label>
+        <input type="text" class="form-control" id="item-name" required>
+      </div>
+      <div class="form-group">
+        <label for="item-sku">SKU:</label>
+        <input type="text" class="form-control" id="item-sku" required>
+      </div>
+      <div class="form-group">
+        <label for="item-unit">Unit:</label>
+        <input type="text" class="form-control" id="item-unit" required>
+      </div>
+      <div class="form-group">
+        <label for="item-price">U.Price:</label>
+        <input type="number" class="form-control" id="item-price" step="0.01" required>
+      </div>
+      <div class="form-group">
+        <label for="item-quantity">Quantity:</label>
+        <input type="number" class="form-control" id="item-quantity" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Item</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap 3 JS and custom JavaScript code -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Handle form submission to add a new item
+      $('#add-item-form').submit(function(event) {
+        event.preventDefault();
+        
+        // Retrieve form values
+        var itemName = $('#item-name').val();
+        var itemSKU = $('#item-sku').val();
+        var itemUnit = $('#item-unit').val();
+        var itemPrice = parseFloat($('#item-price').val());
+        var itemQuantity = parseInt($('#item-quantity').val());
+
+        // Calculate total price
+        var itemTotal = itemPrice * itemQuantity;
+
+        // Check if item already exists in the table
+        var existingItem = $('#item-list').find('tr[data-sku="' + itemSKU + '"]');
+        if (existingItem.length > 0) {
+          // Update the quantity and total of the existing item
+          var existingQuantity = parseInt(existingItem.find('.item-quantity').text());
+          var existingTotal = parseFloat(existingItem.find('.item-total').text());
+
+          var newQuantity = existingQuantity + itemQuantity;
+          var newTotal = existingTotal + itemTotal;
+
+          existingItem.find('.item-quantity').text(newQuantity);
+          existingItem.find('.item-total').text(newTotal.toFixed(2));
+        } else {
+          // Add a new row for the item
+          var newRow = '<tr data-sku="' + itemSKU + '">' +
+            '<td>' + itemName + '</td>' +
+            '<td>' + itemSKU + '</td>' +
+            '<td>' + itemUnit + '</td>' +
+            '<td>' + itemPrice.toFixed(2) + '</td>' +
+            '<td class="item-quantity">' + itemQuantity + '</td>' +
+            '<td class="item-total">' + itemTotal.toFixed(2) + '</td>' +
+            '</tr>';
+
+          $('#item-list').append(newRow);
+        }
+
+        // Clear the form inputs
+        $('#add-item-form')[0].reset();
+      });
+    });
+  </script>
+</body>
+</html>

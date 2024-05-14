@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Seller's Product Barcode Interface</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Seller's Product Barcode Interface</h2>
+    <form id="productForm">
+      <div class="form-group">
+        <label for="productName">Product Name:</label>
+        <input type="text" class="form-control" id="productName" required>
+      </div>
+      <div class="form-group">
+        <label for="barcode">Barcode:</label>
+        <input type="text" class="form-control" id="barcode" readonly>
+      </div>
+      <button type="submit" class="btn btn-primary">Generate Barcode</button>
+    </form>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdn.rawgit.com/lindell/JsBarcode/3.11.0/dist/jsbarcode.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Initialize form submission
+      $("#productForm").on("submit", function(e) {
+        e.preventDefault();
+        generateBarcode();
+      });
+
+      // Generate barcode
+      function generateBarcode() {
+        var productName = $("#productName").val();
+        var barcodeValue = generateRandomBarcode(); // You can replace this with your own barcode generation logic
+        $("#barcode").val(barcodeValue);
+        JsBarcode("#barcode", barcodeValue);
+      }
+
+      // Generate a random barcode value (dummy implementation)
+      function generateRandomBarcode() {
+        return Math.floor(Math.random() * 1000000000000).toString();
+      }
+    });
+  </script>
+</body>
+</html>

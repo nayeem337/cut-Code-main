@@ -1,0 +1,36 @@
+Web Debug On OFF system 
+
+=> config->App
+ 'debug' => env('APP_DEBUG', false),
+
+=> Side Bar 
+ @if (auth()->id() == 1)
+
+                <li class="">
+                    <a href="{{ url('/update-debug') }}" title="Toggle Debug @if (config('app.debug') === true) Off @else On @endif">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Debug @if (config('app.debug') === true) Off @else On @endif
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+
+            @endif
+
+
+=> Route 
+ Route::get('/update-debug', function () {
+
+        if (config('app.debug') === false) {
+            Artisan::call('debug on');
+        } else {
+            Artisan::call('debug off');
+        }
+
+        Artisan::call('optimize:clear');
+
+        return redirect()->back()->with('message', 'DebugBar updated successfully');
+    })->middleware('super-admin');
+
+
+
+this system Totali Automation Debuging On OFF

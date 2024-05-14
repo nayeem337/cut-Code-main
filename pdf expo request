@@ -1,0 +1,31 @@
+   public function historyindex(Request $request)
+    {
+        $data['data'] = MainWeightTable::orderBy('id', 'DESC')->get();
+
+        if ($request->filled('export_type')) {
+            $filename = 'historyIndex' . '-' . fdate(date('Y-m-d'), 'Y_m_d');
+
+            $pdf = PDF::loadview('Weight.sale-pdf', $data, [], [
+                'margin_header'         => 10,
+                'margin_footer'         => 5,
+                'mode'                  => 'utf-8',
+                'format'                => 'A4-L',
+                'orientation'           => 'L'
+            ]);
+
+            $pdf->getMpdf()->setFooter("{PAGENO} / {nb}");
+
+            return $pdf->stream($filename . '.pdf');
+        }
+
+        // Pass $data to the view
+        return view('Weight.historyIndex', $data);
+    }
+
+
+
+
+   <a href="{{ route('dokani.historyindex') }}?export_type=pdf&{{ http_build_query(request()->except('export_type', '_token')) }}"
+                                            title="Pdf" target="_blank">
+                                             <img src="{{ asset('assets/images/export-icons/pdf-icon.png') }}" alt="">
+                                         </a>

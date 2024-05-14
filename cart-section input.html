@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller POS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .btn-remove {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mt-3">Seller POS</h2>
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>SKU</th>
+                    <th>Unit</th>
+                    <th>U.Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Product Box</h4>
+                <div id="product-box">
+                    <!-- Product details will be displayed here -->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4>Cart Summary</h4>
+                <div id="cart-summary">
+                    <strong>Subtotal:</strong> <span id="subtotal">0</span><br>
+                    <strong>Tax:</strong> <input type="number" id="tax" value="0"><br>
+                    <hr>
+                    <strong>Total:</strong> <span id="total">0</span><br>
+                    <button class="btn btn-primary mt-3" onclick="checkout()">Checkout</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <h4>Add Item</h4>
+                <form id="add-item-form">
+                    <div class="form-group">
+                        <label for="sku">SKU:</label>
+                        <input type="text" class="form-control" id="sku" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="unit">Unit:</label>
+                        <input type="text" class="form-control" id="unit" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="uprice">U.Price:</label>
+                        <input type="number" class="form-control" id="uprice" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" class="form-control" id="quantity" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Add Item</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cartItems = []; // Array to store cart items
+
+        // Function to add an item to the cart
+        function addItem(event) {
+            event.preventDefault();
+
+            let item = {
+                SKU: document.getElementById('sku').value,
+                Unit: document.getElementById('unit').value,
+                UPrice: parseFloat(document.getElementById('uprice').value),
+                Quantity: parseInt(document.getElementById('quantity').value)
+            };
+
+            // Check if the item is already in the cart
+            let existingItem = cartItems.find(i => i.SKU === item.SKU);
+            if (existingItem) {
+                existingItem.Quantity += item.Quantity;
+                updateCartItem(existingItem); // Update the quantity in the cart
+            } else {
+                cartItems.push(item); // Add the item to the cart
+                renderCartItem(item); // Render the item in the cart
+            }
+
+            clearFields(); // Clear input fields after adding an item
+            updateSummary(); // Update the cart summary
+        }
+
+        // Function to render a cart item row
+        function renderCartItem(item) {
+            let cartItemsElement = document.getElementById('cart-items');
+            let newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${cartItems.length}</td>
+                <td>${item.SKU}</td>
+                <td>${item.Unit}</td>
+                <td>${item.UPrice}</td>
+                <td>${item.Quantity}</td>
+                <td>${item.UPrice * item.Quantity}</td>
+                <td class="btn-remove" onclick="removeItem('${item.SKU}')">Remove</td>
+            `;
+            cartItemsElement.appendChild(newRow);
+        }
+
+        // Function to update the quantity of a cart item
+        function updateCartItem(item) {
+            let row = document.querySelector(`#cart-items td:nth-child(2):contains('${item.SKU}')`).parentNode;
+            let quantityCell = row.querySelector('td:nth-child(5)');
+            let totalCell = row.querySelector('td:nth-child(6)');
+
+            quantityCell.textContent = item.Quantity;
+            totalCell.textContent = item.UPrice * item.Quantity;
+        }
+
+        // Function to remove an item from the cart
+        function removeItem(sku) {
+            let index = cartItems.findIndex(i => i.SKU === sku);
+            if (index !== -1) {
+                cartItems.splice(index, 1); // Remove the item from the cart
+                updateCart(); // Update the cart with the removed item
+                updateSummary(); // Update the cart summary
+            }
+        }
+
+        // Function to update the cart with the latest items
+        function updateCart() {
+            let cartItemsElement = document.getElementById('cart-items');
+            cartItemsElement.innerHTML = ''; // Clear the cart items
+
+            cartItems.forEach(item => {
+                renderCartItem(item); // Render each item in the cart
+            });
+        }
+
+        // Function to update the cart summary
+        function updateSummary() {
+            let subtotal = 0;
+            cartItems.forEach(item => {
+                subtotal += item.UPrice * item.Quantity;
+            });
+
+            let tax = parseFloat(document.getElementById('tax').value);
+            let total = subtotal + tax;
+
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+            document.getElementById('total').textContent = total.toFixed(2);
+        }
+
+        // Function to clear input fields
+        function clearFields() {
+            document.getElementById('sku').value = '';
+            document.getElementById('unit').value = '';
+            document.getElementById('uprice').value = '';
+            document.getElementById('quantity').value = '';
+        }
+
+        // Function to proceed with checkout (placeholder)
+        function checkout() {
+            alert('Checkout completed!');
+        }
+
+        // Add event listener to the "Add Item" form
+        document.getElementById('add-item-form').addEventListener('submit', addItem);
+    </script>
+</body>
+</html>

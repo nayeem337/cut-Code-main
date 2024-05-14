@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VAT Calculation</title>
+</head>
+<body>
+  <label for="subtotal">Subtotal:</label>
+  <input type="number" id="subtotal">
+
+  <label for="vatRate">VAT Rate (%):</label>
+  <input type="number" id="vatRate">
+
+  <p id="vatAmount"></p>
+  <p id="totalAmount"></p>
+
+  <script>
+    var subtotalInput = document.getElementById("subtotal");
+    var vatRateInput = document.getElementById("vatRate");
+    var vatAmountResult = document.getElementById("vatAmount");
+    var totalAmountResult = document.getElementById("totalAmount");
+
+    // Add event listeners to the input fields
+    subtotalInput.addEventListener("input", calculateVAT);
+    vatRateInput.addEventListener("input", calculateVAT);
+
+    function calculateVAT() {
+      var subtotal = parseFloat(subtotalInput.value);
+      var vatRate = parseFloat(vatRateInput.value);
+
+      var vatAmount = subtotal * (vatRate / 100);
+      var totalAmount = subtotal + vatAmount;
+
+      vatAmountResult.textContent = "VAT Amount: " + vatAmount.toFixed(2);
+      totalAmountResult.textContent = "Total Amount: " + totalAmount.toFixed(2);
+    }
+  </script>
+</body>
+</html>

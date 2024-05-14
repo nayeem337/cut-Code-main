@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VAT, Shipping, and Discount Calculation</title>
+</head>
+<body>
+  <label for="subtotal">Subtotal:</label>
+  <input type="number" id="subtotal">
+
+  <label for="vatRate">VAT Rate (%):</label>
+  <input type="number" id="vatRate">
+
+  <label for="shippingCost">Shipping Cost:</label>
+  <input type="number" id="shippingCost">
+
+  <label for="discount">Discount:</label>
+  <input type="number" id="discount">
+
+  <p id="vatAmount"></p>
+  <p id="shippingAmount"></p>
+  <p id="discountAmount"></p>
+  <p id="totalAmount"></p>
+
+  <script>
+    var subtotalInput = document.getElementById("subtotal");
+    var vatRateInput = document.getElementById("vatRate");
+    var shippingCostInput = document.getElementById("shippingCost");
+    var discountInput = document.getElementById("discount");
+    var vatAmountResult = document.getElementById("vatAmount");
+    var shippingAmountResult = document.getElementById("shippingAmount");
+    var discountAmountResult = document.getElementById("discountAmount");
+    var totalAmountResult = document.getElementById("totalAmount");
+
+    // Add event listeners to the input fields
+    subtotalInput.addEventListener("input", calculateTotal);
+    vatRateInput.addEventListener("input", calculateTotal);
+    shippingCostInput.addEventListener("input", calculateTotal);
+    discountInput.addEventListener("input", calculateTotal);
+
+    function calculateTotal() {
+      var subtotal = parseFloat(subtotalInput.value);
+      var vatRate = parseFloat(vatRateInput.value);
+      var shippingCost = parseFloat(shippingCostInput.value);
+      var discount = parseFloat(discountInput.value);
+
+      var vatAmount = subtotal * (vatRate / 100);
+      var shippingAmount = shippingCost;
+      var discountAmount = subtotal * (discount / 100);
+      var totalAmount = subtotal + vatAmount + shippingAmount - discountAmount;
+
+      vatAmountResult.textContent = "VAT Amount: " + vatAmount.toFixed(2);
+      shippingAmountResult.textContent = "Shipping Amount: " + shippingAmount.toFixed(2);
+      discountAmountResult.textContent = "Discount Amount: " + discountAmount.toFixed(2);
+      totalAmountResult.textContent = "Total Amount: " + totalAmount.toFixed(2);
+    }
+  </script>
+</body>
+</html>

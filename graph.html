@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter Plot</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="scatterPlot" width="400" height="200"></canvas>
+    
+    <script>
+        // Get the canvas element and its context
+        const canvas = document.getElementById("scatterPlot");
+        const ctx = canvas.getContext("2d");
+
+        // Define data points (x, y) for the graph
+        const dataPoints = [
+            { x: 50, y: 80 },
+            { x: 100, y: 40 },
+            { x: 150, y: 120 },
+            { x: 200, y: 60 },
+            { x: 250, y: 90 },
+            { x: 300, y: 30 }
+        ];
+
+        // Set the graph properties
+        const xOffset = 30;
+        const yOffset = 20;
+        const graphWidth = canvas.width - xOffset * 2;
+        const graphHeight = canvas.height - yOffset * 2;
+
+        // Function to draw the graph
+        function drawGraph() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the axes
+            ctx.beginPath();
+            ctx.moveTo(xOffset, yOffset);
+            ctx.lineTo(xOffset, yOffset + graphHeight);
+            ctx.lineTo(xOffset + graphWidth, yOffset + graphHeight);
+            ctx.stroke();
+
+            // Draw data points as circles
+            ctx.fillStyle = "blue"; // Change circle color
+
+            for (let i = 0; i < dataPoints.length; i++) {
+                const x = xOffset + (dataPoints[i].x / 300) * graphWidth;
+                const y = yOffset + (1 - dataPoints[i].y / 120) * graphHeight;
+
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
+        // Call the drawGraph function to initially draw the graph
+        drawGraph();
+    </script>
+</body>
+</html>

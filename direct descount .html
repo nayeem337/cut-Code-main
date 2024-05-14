@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Discount Form</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+  <h1>Discount Form</h1>
+  <input type="number" id="totalPrice" placeholder="Total price">
+  <input type="number" id="extraDiscount" placeholder="Additional discount">
+  <button id="calculateDiscount">Calculate Discount</button>
+  <div id="resultSection"></div>
+
+  <script>
+    $(document).ready(function() {
+      $('#calculateDiscount').click(function() {
+        var totalPrice = parseFloat($('#totalPrice').val());
+        var extraDiscount = parseFloat($('#extraDiscount').val());
+        var resultSection = $('#resultSection');
+
+        // Calculate the discounted price
+        var discountedPrice = totalPrice - (extraDiscount / totalPrice) * 100;
+
+        // Validate if the discounted price is a valid number
+        if (isNaN(discountedPrice) || discountedPrice < 0) {
+          resultSection.text('Invalid input. Please enter valid numbers.');
+        } else {
+          resultSection.text('Discounted price: ' + discountedPrice.toFixed(2));
+        }
+      });
+    });
+  </script>
+</body>
+</html>

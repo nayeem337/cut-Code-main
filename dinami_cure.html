@@ -1,0 +1,360 @@
+<section class="ml-6 col-md-12 mb-6 page-content">
+            <div class="m-1">
+                <div class="ui ui-widget ui-widget-content">
+                    <div class="row " style="width: 1463px">
+                        <div class="col-sm-5 ml-3 box mb-2 overflow-scroll">
+                            <div class="table-responsive mt-1 p-0">
+                                    <div class="search-any-product d-flex">
+                                        <div class="input-group input-group-sm" style="border: 0px ; border-bottom: floralwhite "!importan>
+                                            <span class="input-group-addon"><i class="ace-icon fa fa-barcode"></i></span>
+                                        <input type="text" class="form-control rounded-0 search-input" name="product_search" id="searchInput" placeholder="Scan Your Barcode or SKU" autocomplete="off">
+                                        </div>
+                                        <div class="dropdown-content live-load-content">
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover item-table card card-table"  id="searchInput">
+                                        <thead style="background-color: aliceblue; border-bottom: 2px solid;">
+                                        <tr>
+                                            <th width="25%">Item</th>
+                                            <th width="15%">SKU</th>
+                                            <th width="15%">Unit</th>
+                                            <th width="12%" class="text-end">U.Price</th>
+                                            <th width="18%" class="text-center">Quantity</th>
+                                            <th width="13%" class="text-center">Total</th>
+                                            <th width="2%"><svg class="svg-inline--fa fa-times fa-w-11" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" data-fa-i2svg=""><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg><!-- <i class="fas fa-times"></i> Font Awesome fontawesome.com --></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="t-body" class="cart-items">
+                                        <tr id="emptycart">
+                                            <td colspan="7" class="text-center p-5">
+                                                <img src="{{asset('/')}}img/images.png" height="400" alt="emptycart">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                <div class="total-price">Total: BDT 0</div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6 ml-3 box mb-2  overflow-scroll">
+
+
+{{--                            <div class=" row" style="padding: 5px">--}}
+{{--                                <!-- Sales Card -->--}}
+{{--                                <div class="product-item">--}}
+{{--                                    <div class="xs">Product 2</div>--}}
+{{--                                    <div class="xs">SKU002</div>--}}
+{{--                                    <div class="xs">Each</div>--}}
+{{--                                    <div class="xs">$15</div>--}}
+{{--                                    <div class="xs quantity">--}}
+{{--                                        <input type="number" class="form-control quantity" value="1">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-xs-2">--}}
+{{--                                        <button class="btn btn-primary add-to-cart">Add to Cart</button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+
+
+                            @foreach($products as $key => $product)
+                                <div class="col-xs-2 col-sm-2 col-md-4 overflow">
+                                    <div class="search-thumbnail">
+                                        <div class="pl-3 thumbnail search-thumbnail">
+                                            <div class="card gradient-1 product-item" id="product-item-{{$key}}" data-product-id="{{$key}}">
+                                                <h5 class="card-header name-product" style="padding: 5px; margin-top: 0px">{{$product->xgitem}}</h5>
+                                                <div class="card-body p-2">
+                                                    <div class="d-inline-block">
+                                                        <h2 class="text-white price-product" style="padding: 5px">45</h2>
+                                                        <p><span class="pull-right label label-grey quantity">1</span></p>
+                                                    </div>
+                                                    <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+
+{{--                            <div class="col-xs-2 col-sm-2 col-md-4 overflow   "id="add-to-cart-1"  style="color: #1f2937 ; width: 230px; padding: 3px"!importent>--}}
+{{--                                <div class=" search-thumbnail"style="padding:0px">--}}
+{{--                                    <div class="pl-3 thumbnail search-thumbnail">--}}
+{{--                                        <div class="card gradient-1 product-item " style="background-color:#d3eaf1">--}}
+{{--                                            <h5 class="card-header name-product" style="padding: 5px ; margin-top: 0px">Products </h5>--}}
+{{--                                            <div class="card-body p-2">--}}
+{{--                                                <div class="d-inline-block">--}}
+{{--                                                    <h2 class="text-white price-product" style="padding: 5px">35</h2>--}}
+{{--                                                    <p><span class="pull-right label label-grey quantity ">2</span></p>--}}
+{{--                                                </div>--}}
+{{--                                                <span class="float-right display-5 opacity-5 "><i class="fa fa-shopping-cart"></i></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  " style="color: #1f2937 ; width: 230px; padding: 3px"!importent>--}}
+{{--                                <div class=" search-thumbnail"style="padding:0px">--}}
+{{--                                    <div class="pl-3 thumbnail search-thumbnail">--}}
+{{--                                        <div class="card gradient-1 product-item " style="background-color:#d3eaf1">--}}
+{{--                                            <h5 class="card-header name-product" style="padding: 5px ; margin-top: 0px">Laptop</h5>--}}
+{{--                                            <div class="card-body p-2">--}}
+{{--                                                <div class="d-inline-block">--}}
+{{--                                                    <h2 class="text-white price-product" style="padding: 5px">100</h2>--}}
+{{--                                                    <p><span class="pull-right label label-grey quantity ">2</span></p>--}}
+{{--                                                </div>--}}
+{{--                                                <span class="float-right display-5 opacity-5 "><i class="fa fa-shopping-cart"></i></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  " style="color: #1f2937 ; width: 230px; padding: 3px"!importent>--}}
+{{--                                <div class=" search-thumbnail"style="padding:0px">--}}
+{{--                                    <div class="pl-3 thumbnail search-thumbnail">--}}
+{{--                                        <div class="card gradient-1 product-item " style="background-color:#d3eaf1">--}}
+{{--                                            <h5 class="card-header name-product" style="padding: 5px ; margin-top: 0px">Phone</h5>--}}
+{{--                                            <div class="card-body p-2">--}}
+{{--                                                <div class="d-inline-block">--}}
+{{--                                                    <h2 class="text-white price-product" style="padding: 5px">5</h2>--}}
+{{--                                                    <p><span class="pull-right label label-grey quantity ">5</span></p>--}}
+{{--                                                </div>--}}
+{{--                                                <span class="float-right display-5 opacity-5 "><i class="fa fa-shopping-cart"></i></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  " style="color: #1f2937 ; width: 230px; padding: 3px"!importent>--}}
+{{--                                <div class=" search-thumbnail"style="padding:0px">--}}
+{{--                                    <div class="pl-3 thumbnail search-thumbnail">--}}
+{{--                                        <div class="card gradient-1 product-item " style="background-color:#d3eaf1">--}}
+{{--                                            <h5 class="card-header name-product" style="padding: 5px ; margin-top: 0px">Monitor</h5>--}}
+{{--                                            <div class="card-body p-2">--}}
+{{--                                                <div class="d-inline-block">--}}
+{{--                                                    <h2 class="text-white price-product" style="padding: 5px">35</h2>--}}
+{{--                                                    <p><span class="pull-right label label-grey quantity ">3</span></p>--}}
+{{--                                                </div>--}}
+{{--                                                <span class="float-right display-5 opacity-5 "><i class="fa fa-shopping-cart"></i></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+
+
+
+
+
+
+
+
+                            <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  " style="color: #1f2937 ; width: 230px; padding: 3px"!importent>
+                                    <div class=" search-thumbnail"style="padding:0px">
+                                        <div class="pl-3 thumbnail search-thumbnail">
+                                        <div class="card gradient-1 " style="background-color:#d3eaf1">
+                                            <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products Sold</h5>
+                                            <div class="card-body p-2">
+                                                <div class="d-inline-block">
+                                                    <h2 class="text-white" style="padding: 5px">45 </h2>
+                                                    <p><span class="pull-right label label-grey ">Tokyo</span></p>
+                                                </div>
+                                                <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  " style="color: #1f2937 ; width: 230px; padding: 3px"!importent>
+                                <div class=" search-thumbnail"style="padding:0px">
+                                    <div class="pl-3 thumbnail search-thumbnail">
+                                        <div class="card gradient-1 " style="background-color:#d3eaf1">
+                                            <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products Sold</h5>
+                                            <div class="card-body p-2">
+                                                <div class="d-inline-block">
+                                                    <h2 class="text-white" style="padding: 5px">45 BDT</h2>
+                                                    <p><span class="pull-right label label-grey ">Tokyo</span></p>
+                                                </div><span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                            </div>
+                                        </div></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  " style="color: #1f2937 ; width: 230px; padding: 3px"!importent>
+                                                            <div class=" search-thumbnail"style="padding:0px">
+                                                                <div class="pl-3 thumbnail search-thumbnail">
+                                                                    <div class="card gradient-1 " style="background-color:#d3eaf1">
+                                                                        <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products Sold</h5>
+                                                                        <div class="card-body p-2">
+                                                                            {{--                                                <h3 class="card-title text-white" style="padding: 5px">Products Sold</h3>--}}
+                                                                            <div class="d-inline-block">
+                                                                                <h2 class="text-white" style="padding: 5px">45 BDT</h2>
+                                                                                <p><span class="pull-right label label-grey ">Tokyo</span></p>
+                                                                                {{--                                                <p class="text-white mb-0">Jan - March 2019</p>--}}
+                                                                            </div>
+                                                                            <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  " style="color: #1f2937 ; width: 230px; padding: 3px"!importent>
+                                                            <div class=" search-thumbnail"style="padding:0px">
+                                                                <div class="pl-3 thumbnail search-thumbnail">
+                                                                    <div class="card gradient-1 " style="background-color:#d3eaf1">
+                                                                        <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products Sold</h5>
+                                                                        <div class="card-body p-2">
+                                                                            {{--                                                <h3 class="card-title text-white" style="padding: 5px">Products Sold</h3>--}}
+                                                                            <div class="d-inline-block">
+                                                                                <h2 class="text-white" style="padding: 5px">45 BDT</h2>
+                                                                                <p><span class="pull-right label label-grey ">Tokyo</span></p>
+                                                                                {{--                                                <p class="text-white mb-0">Jan - March 2019</p>--}}
+                                                                            </div>
+                                                                            <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            <div class="col-xs-2 col-sm-2 col-md-4 overflow add-to-cart  " style="color: #1f2937 ; width: 230px; padding: 3px"!importent>
+                                                            <div class=" search-thumbnail"style="padding:0px">
+                                                                <div class="pl-3 thumbnail search-thumbnail">
+                                                                    <div class="card gradient-1 " style="background-color:#d3eaf1">
+                                                                        <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products Sold</h5>
+                                                                        <div class="card-body p-2">
+                                                                            {{--                                                <h3 class="card-title text-white" style="padding: 5px">Products Sold</h3>--}}
+                                                                            <div class="d-inline-block">
+                                                                                <h2 class="text-white" style="padding: 5px">45 BDT</h2>
+                                                                                <p><span class="pull-right label label-grey ">Tokyo</span></p>
+                                                                                {{--                                                <p class="text-white mb-0">Jan - March 2019</p>--}}
+                                                                            </div>
+                                                                            <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                            <div class="col-xs-2 col-sm-2 col-md-4 overflow " style="color: #1f2937 ; width: 230px; padding: 3px"!importent>
+                                    <div class=" search-thumbnail"style="padding:0px">
+                                        <div class="pl-3 thumbnail search-thumbnail">
+                                        <div class="card gradient-1 " style="background-color:#d3eaf1">
+                                            <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products Sold</h5>
+                                            <div class="card-body p-2">
+{{--                                                <h3 class="card-title text-white" style="padding: 5px">Products Sold</h3>--}}
+                                                <div class="d-inline-block">
+                                                    <h2 class="text-white" style="padding: 5px">45 BDT</h2>
+                                                    <p><span class="pull-right label label-grey ">Tokyo</span></p>
+                                                    {{--                                                <p class="text-white mb-0">Jan - March 2019</p>--}}
+                                                </div>
+                                                <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-xs-2 col-sm-2 col-md-4 overflow " style="color: #1f2937 ; width: 230px; padding: 3px"!importent>
+                                    <div class=" search-thumbnail"style="padding:0px">
+                                        <div class="pl-3 thumbnail search-thumbnail">
+                                        <div class="card gradient-1 " style="background-color:#d3eaf1">
+                                            <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products Sold</h5>
+                                            <div class="card-body p-2">
+{{--                                                <h3 class="card-title text-white" style="padding: 5px">Products Sold</h3>--}}
+                                                <div class="d-inline-block">
+                                                    <h2 class="text-white" style="padding: 5px">45 BDT</h2>
+                                                    <p><span class="pull-right label label-grey ">Tokyo</span></p>
+                                                    {{--                                                <p class="text-white mb-0">Jan - March 2019</p>--}}
+                                                </div>
+                                                <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-xs-2 col-sm-2 col-md-4 overflow " style="color: #1f2937 ; width: 230px; padding: 3px"!importent>
+                                    <div class=" search-thumbnail"style="padding:0px">
+                                        <div class="pl-3 thumbnail search-thumbnail">
+                                        <div class="card gradient-1 " style="background-color:#d3eaf1">
+                                            <h5 class="card-header" style="padding: 5px ; margin-top: 0px">Products Sold</h5>
+                                            <div class="card-body p-2">
+{{--                                                <h3 class="card-title text-white" style="padding: 5px">Products Sold</h3>--}}
+                                                <div class="d-inline-block">
+                                                    <h2 class="text-white" style="padding: 5px">45 BDT</h2>
+                                                    <p><span class="pull-right label label-grey ">Tokyo</span></p>
+                                                    {{--                                                <p class="text-white mb-0">Jan - March 2019</p>--}}
+                                                </div>
+                                                <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
+
+
+
+
+
+////////////////////////
+
+
+java//
+////
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var cartItems = [];
+        var total = 0;
+     $(document).on("click", ".product-item", function() {
+            var productId = $(this).data("product-id");
+            var key = productId.toString();
+            var selector = "#product-item-" + key;
+            var productItem = $(selector);
+            var item = productItem.find(".name-product").text().trim();
+            var price = parseInt(productItem.find(".price-product").text().trim());
+            var quantity = parseInt(productItem.find(".quantity").text().trim());
+            var itemTotal = price * quantity;
+            total += itemTotal;
+
+            var cartItem = {
+                item: item,
+                price: price,
+                quantity: quantity,
+                total: itemTotal
+            };
+
+            if (cartItems[key]) {
+                cartItems[key].quantity += quantity;
+                cartItems[key].total += itemTotal;
+            } else {
+                cartItems[key] = cartItem;
+            }
+
+            $(".cart-items").empty();
+            for (var key in cartItems) {
+                if (cartItems.hasOwnProperty(key)) {
+                    var currentItem = cartItems[key];
+                    $(".cart-items").append(`
+                <tr>
+                    <td>${currentItem.item}</td>
+                    <td>${currentItem.price}</td>
+                    <td>${currentItem.quantity}</td>
+                    <td>${currentItem.total}</td>
+                </tr>
+            `);
+                }
+            }
+
+            $(".total-price").text("Total: BDT " + total);
+        });
+
+
+
+    });
+</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Select All Checkbox</title>
+  <script>
+    function selectAll(source) {
+      var checkboxes = document.getElementsByName('checkbox');
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
+  </script>
+</head>
+<body>
+  <h3>Select All Checkbox Example</h3>
+  
+  <label for="select-all">Select All:</label>
+  <input type="checkbox" id="select-all" onchange="selectAll(this)">
+  
+  <br><br>
+  
+  <label for="checkbox1">Checkbox 1</label>
+  <input type="checkbox" name="checkbox" id="checkbox1">
+  
+  <br>
+  
+  <label for="checkbox2">Checkbox 2</label>
+  <input type="checkbox" name="checkbox" id="checkbox2">
+  
+  <br>
+  
+  <label for="checkbox3">Checkbox 3</label>
+  <input type="checkbox" name="checkbox" id="checkbox3">
+  
+  <br>
+  
+  <label for="checkbox4">Checkbox 4</label>
+  <input type="checkbox" name="checkbox" id="checkbox4">
+  
+</body>
+</html>
